@@ -13,12 +13,14 @@ variables:
   solution: "**/*.sln"
   buildPlatform: "Any CPU"
   buildConfiguration: "Release"
+  dotnet_version: "8.x"
 
 steps:
   - task: UseDotNet@2
+    displayName: "Use .NET Core SDK"
     inputs:
       packageType: "sdk"
-      version: "8.x"
+      version: "$(dotnet_version)"
 
   - task: DotNetCoreCLI@2
     displayName: "Restore packages"
@@ -27,10 +29,11 @@ steps:
       projects: "$(solution)"
 
   - task: DotNetCoreCLI@2
+    displayName: 'Build solution'
     inputs:
-      command: "build"
-      projects: "**/*.csproj"
-      arguments: "--configuration $(buildConfiguration)"
+      command: 'build'
+      projects: '$(solution)'
+      arguments: '--configuration $(buildConfiguration) --no-restore'
 # - task: VSBuild@1
 #   inputs:
 #     solution: '$(solution)'
