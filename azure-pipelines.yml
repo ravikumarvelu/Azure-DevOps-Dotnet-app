@@ -4,43 +4,33 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- dev
+  - dev
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  solution: "**/*.sln"
+  buildPlatform: "Any CPU"
+  buildConfiguration: "Release"
 
 steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      version: "8.x"
 
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '8.x'
+  - task: DotNetCoreCLI@2
+    displayName: "Restore packages"
+    inputs:
+      command: "restore"
+      projects: "$(solution)"
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      sudo apt update
-      sudo apt install mono-complete
-
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: "build"
+      projects: "**/*.csproj"
+      arguments: "--configuration $(buildConfiguration)"
 # - task: VSBuild@1
 #   inputs:
 #     solution: '$(solution)'
