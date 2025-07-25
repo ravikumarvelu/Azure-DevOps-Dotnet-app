@@ -40,6 +40,7 @@ steps:
       codeCoverageTool: "Cobertura"
       summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
 
+
     # - task: WhiteSource@21
     #   inputs:
     #     cwd: '$(System.DefaultWorkingDirectory)'
