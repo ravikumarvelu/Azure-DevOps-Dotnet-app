@@ -35,21 +35,24 @@ steps:
       projects: '$(solution)'
       arguments: '--configuration $(buildConfiguration) --no-restore'
 
-
-  - task: DotNetCoreCLI@2
-    displayName: 'Publish application'
+  - task: WhiteSource@21
     inputs:
-      command: 'publish'
-      projects: '**/asp-webapp.csproj'
-      arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-      publishWebProjects: false
+      cwd: '$(System.DefaultWorkingDirectory)'
 
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish artifacts'
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'webapp'
-      publishLocation: 'Container'
+  # - task: DotNetCoreCLI@2
+  #   displayName: 'Publish application'
+  #   inputs:
+  #     command: 'publish'
+  #     projects: '**/asp-webapp.csproj'
+  #     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+  #     publishWebProjects: false
+
+  # - task: PublishBuildArtifacts@1
+  #   displayName: 'Publish artifacts'
+  #   inputs:
+  #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  #     ArtifactName: 'webapp'
+  #     publishLocation: 'Container'
 # - task: VSBuild@1
 #   inputs:
 #     solution: '$(solution)'
