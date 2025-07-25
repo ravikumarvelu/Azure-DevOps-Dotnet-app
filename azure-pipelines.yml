@@ -38,8 +38,8 @@ steps:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'test'
-      projects: '"**/webtest.csproj"'
-      arguments: '--configuration $(buildConfiguration)'
+      projects: "**/webtest.csproj"
+      arguments: "--configuration $(buildConfiguration)"
 
 
   # - task: WhiteSource@21
