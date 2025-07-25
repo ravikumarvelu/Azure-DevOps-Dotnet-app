@@ -1,5 +1,7 @@
 # ASP.NET Core Web Application
 
+[![Build Status](https://dev.azure.com/RaviKumar-practice/DevOps/_apis/build/status%2Fravikumarvelu.Azure-DevOps-Dotnet-app?branchName=main)](https://dev.azure.com/RaviKumar-practice/DevOps/_build/latest?definitionId=4&branchName=main)
+
 A modern ASP.NET Core 8.0 web application built with Razor Pages.
 
 ## Features
@@ -44,6 +46,7 @@ dotnet run --project asp-webapp
 ```
 
 The application will be available at:
+
 - HTTPS: `https://localhost:7000`
 - HTTP: `http://localhost:5000`
 
@@ -78,6 +81,7 @@ The application includes health checks available at `/health` endpoint.
 ### Configuration
 
 Configuration is managed through:
+
 - `appsettings.json` - Base configuration
 - `appsettings.Development.json` - Development overrides
 - Environment variables
