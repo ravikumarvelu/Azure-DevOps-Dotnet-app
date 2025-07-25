@@ -36,11 +36,18 @@ steps:
       arguments: "--configuration $(buildConfiguration) --no-restore"
 
   - task: DotNetCoreCLI@2
+    displayName: "Run unit tests"
     inputs:
-      command: 'test'
+      command: "test"
       projects: "**/webtest.csproj"
-      arguments: "--configuration $(buildConfiguration)"
+      arguments: "/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/ /p:Configuration=$(buildConfiguration)"
+      publishTestResults: true
 
+  - task: PublishCodeCoverageResults@1
+    displayName: "Publish code coverage results"
+    inputs:
+      codeCoverageTool: "Cobertura"
+      summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/TestResults/coverage.cobertura.xml"
 
   # - task: WhiteSource@21
   #   inputs:
